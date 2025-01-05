@@ -1,0 +1,7 @@
+/home/batman/weatherApp_cs/MeteoApp/obj/Debug/net9.0/MeteoApp.csproj.AssemblyReference.cache
+/home/batman/weatherApp_cs/MeteoApp/obj/Debug/net9.0/Avalonia/Resources.Inputs.cache
+/home/batman/weatherApp_cs/MeteoApp/obj/Debug/net9.0/Avalonia/resources
+/home/batman/weatherApp_cs/MeteoApp/obj/Debug/net9.0/MeteoApp.GeneratedMSBuildEditorConfig.editorconfig
+/home/batman/weatherApp_cs/MeteoApp/obj/Debug/net9.0/MeteoApp.AssemblyInfoInputs.cache
+/home/batman/weatherApp_cs/MeteoApp/obj/Debug/net9.0/MeteoApp.AssemblyInfo.cs
+/home/batman/weatherApp_cs/MeteoApp/obj/Debug/net9.0/MeteoApp.csproj.CoreCompileInputs.cache

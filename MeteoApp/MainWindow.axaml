@@ -1,0 +1,27 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Application Météo"
+        Width="800" Height="600">
+    <TabControl>
+        <TabItem Header="Recherche">
+            <StackPanel>
+                <TextBox Name="CityInput" PlaceholderText="Entrez une ville..." />
+                <Button Name="SearchButton" Content="Rechercher" />
+                <TextBlock Name="WeatherOutput" />
+            </StackPanel>
+        </TabItem>
+        <TabItem Header="Prévisions">
+            <TextBlock Name="ForecastOutput" />
+        </TabItem>
+        <TabItem Header="Paramètres">
+            <StackPanel>
+                <TextBox Name="DefaultCity" PlaceholderText="Ville par défaut..." />
+                <ComboBox Name="LanguageSelector">
+                    <ComboBoxItem Content="Français" />
+                    <ComboBoxItem Content="Anglais" />
+                </ComboBox>
+                <Button Name="SaveSettings" Content="Enregistrer" />
+            </StackPanel>
+        </TabItem>
+    </TabControl>
+</Window>

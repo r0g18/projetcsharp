@@ -1,0 +1,12 @@
+/home/batman/weatherApp_cs/MeteoApp.Core/bin/Debug/net9.0/MeteoApp.Core.deps.json
+/home/batman/weatherApp_cs/MeteoApp.Core/bin/Debug/net9.0/MeteoApp.Core.dll
+/home/batman/weatherApp_cs/MeteoApp.Core/bin/Debug/net9.0/MeteoApp.Core.pdb
+/home/batman/weatherApp_cs/MeteoApp.Core/obj/Debug/net9.0/MeteoApp.Core.csproj.AssemblyReference.cache
+/home/batman/weatherApp_cs/MeteoApp.Core/obj/Debug/net9.0/MeteoApp.Core.GeneratedMSBuildEditorConfig.editorconfig
+/home/batman/weatherApp_cs/MeteoApp.Core/obj/Debug/net9.0/MeteoApp.Core.AssemblyInfoInputs.cache
+/home/batman/weatherApp_cs/MeteoApp.Core/obj/Debug/net9.0/MeteoApp.Core.AssemblyInfo.cs
+/home/batman/weatherApp_cs/MeteoApp.Core/obj/Debug/net9.0/MeteoApp.Core.csproj.CoreCompileInputs.cache
+/home/batman/weatherApp_cs/MeteoApp.Core/obj/Debug/net9.0/MeteoApp.Core.dll
+/home/batman/weatherApp_cs/MeteoApp.Core/obj/Debug/net9.0/refint/MeteoApp.Core.dll
+/home/batman/weatherApp_cs/MeteoApp.Core/obj/Debug/net9.0/MeteoApp.Core.pdb
+/home/batman/weatherApp_cs/MeteoApp.Core/obj/Debug/net9.0/ref/MeteoApp.Core.dll
