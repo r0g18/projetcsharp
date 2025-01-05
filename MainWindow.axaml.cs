@@ -1,60 +1,66 @@
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using Avalonia.Controls;
 
-public class WeatherService
+namespace MeteoApp
 {
-    private readonly string apiKey;
-
-    public WeatherService(string apiKey)
+    public partial class MainWindow : Window
     {
-        this.apiKey = apiKey ?? throw new ArgumentNullException(nameof(apiKey), "La clé API ne peut pas être nulle.");
-    }
+        private const string ConfigFile = "config.json";
+        private string _apiKey;
 
-    public async Task<string> GetWeatherByCity(string city)
-    {
-        if (string.IsNullOrWhiteSpace(city))
+        public MainWindow()
         {
-            return "Le nom de la ville ne peut pas être vide.";
+            InitializeComponent();
+            LoadApiKey();
         }
 
-        var url = $"https://api.openweathermap.org/data/2.5/weather?q={city}&units=metric&lang=fr&appid={apiKey}";
-
-        try
+        private void LoadApiKey()
         {
-            using var client = new HttpClient();
-            var response = await client.GetAsync(url);
-
-            if (!response.IsSuccessStatusCode)
+            if (!System.IO.File.Exists(ConfigFile))
             {
-                return "Ville introuvable ou problème réseau.";
+                ResultTextBlock.Text = "Erreur : Fichier config.json introuvable.";
+                return;
             }
 
-            var json = await response.Content.ReadAsStringAsync();
-            var data = JObject.Parse(json);
-
-            var cityName = data["name"]?.ToString() ?? "Inconnu";
-            var latitude = data["coord"]?["lat"]?.ToString() ?? "N/A";
-            var longitude = data["coord"]?["lon"]?.ToString() ?? "N/A";
-            var temperature = data["main"]?["temp"]?.ToString() ?? "N/A";
-            var humidity = data["main"]?["humidity"]?.ToString() ?? "N/A";
-            var description = data["weather"]?[0]?["description"]?.ToString() ?? "N/A";
-
-            return $"Ville : {cityName}\n" +
-                   $"Latitude : {latitude}\n" +
-                   $"Longitude : {longitude}\n" +
-                   $"Température : {temperature}°C\n" +
-                   $"Humidité : {humidity}%\n" +
-                   $"Temps : {description}";
+            var config = JsonConvert.DeserializeObject<dynamic>(System.IO.File.ReadAllText(ConfigFile));
+            _apiKey = config.ApiKey;
         }
-        catch (HttpRequestException ex)
+
+        private async void OnSearchWeatherClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            return $"Erreur lors de la connexion au service météo : {ex.Message}";
+            var city = CityTextBox.Text;
+            if (string.IsNullOrWhiteSpace(city))
+            {
+                ResultTextBlock.Text = "Veuillez entrer une ville.";
+                return;
+            }
+
+            await FetchWeatherAsync(city);
         }
-        catch (Exception ex)
+
+        public async Task FetchWeatherAsync(string city)
         {
-            return $"Une erreur inattendue s'est produite : {ex.Message}";
+            try
+            {
+                using var client = new HttpClient();
+                var response = await client.GetStringAsync($"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={_apiKey}&units=metric&lang=fr");
+                dynamic weatherData = JsonConvert.DeserializeObject(response);
+
+                string result = $"Ville : {weatherData.name}\n" +
+                                $"Latitude : {weatherData.coord.lat}, Longitude : {weatherData.coord.lon}\n" +
+                                $"Température : {weatherData.main.temp} °C\n" +
+                                $"Humidité : {weatherData.main.humidity}%\n" +
+                                $"Description : {weatherData.weather[0].description}";
+
+                ResultTextBlock.Text = result;
+            }
+            catch (Exception ex)
+            {
+                ResultTextBlock.Text = $"Erreur : {ex.Message}";
+            }
         }
     }
 }
